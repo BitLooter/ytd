@@ -27,6 +27,13 @@ def findBestVideoStream(streams):
                 bestStream = stream
     return bestStream
 
+def cleanFilename(filename):
+    """Filters problematic characters from a filename"""
+    badChars = {ord('?'): None, ord('*'): None, ord('/'): None,
+                ord('\\'): None, ord(':'): None, ord('"'): "''",
+                ord('<'): None, ord('>'): None, ord('|'): None}
+    return filename.translate(badChars)
+
 def setup():
     # Make a temp directory to store the downloaded files
     tempdir = tempfile.mkdtemp(dir=".")
@@ -45,6 +52,7 @@ def getVideo(url):
     vidInfo = pafy.new(url)
     videoId = vidInfo.videoid
     outputName = vidInfo.title + ".mp4"
+    outputName = cleanFilename(outputName)
     if os.path.exists(os.path.join("..", outputName)):
         overwriteResponse = input(vidInfo.title + " exists. Overwrite (y/N)? ")
         if overwriteResponse == "" or overwriteResponse[0].lower() != "y":
