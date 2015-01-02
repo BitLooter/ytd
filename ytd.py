@@ -64,6 +64,7 @@ def getVideo(url):
     videoFile = videoId + ".mp4"
     audioFile = videoId + ".m4a"
 
+    print("Getting " + vidInfo.title)
     print("Downloading video... ({})".format(videoStream.resolution))
     videoStream.download(filepath=videoFile)
     print("\nDownloading audio... ({})".format(audioStream.bitrate))
