@@ -117,5 +117,12 @@ def getVideo(url):
     
     return vidInfo, outputName
 
+def showUsage():
+    print("Downloads Youtube video in the highest quality with all metadata")
+    print("Usage: {} <Video URL or ID>\n".format(os.path.basename(sys.argv[0])))
+
 if __name__ == "__main__":
-    getVideo(sys.argv[1])
+    if len(sys.argv) != 2:
+        showUsage()
+    else:
+        getVideo(sys.argv[1])
